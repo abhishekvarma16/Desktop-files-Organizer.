@@ -10,6 +10,12 @@ imagefil = [x for x in os.listdir(os.getcwd()) if x.endswith(".PNG") or x.endswi
 pdffil = [x for x in os.listdir(os.getcwd()) if x.endswith(".pdf")]
 ttffils = [x for x in os.listdir(os.getcwd()) if x.endswith(".ttf")]
 javafils = [x for x in os.listdir(os.getcwd()) if x.endswith(".java")]
+mp3files = [x for x in os.listdir(os.getcwd()) if x.endswith(".mp3")]
+wordfiles = [x for x in os.listdir(os.getcwd()) if x.endswith(".docx")]
+zipfiles = [x for x in os.listdir(os.getcwd()) if x.endswith(".zip")]
+zipfiles.extend([x for x in os.listdir(os.getcwd()) if x.endswith(".zipx")])
+zipfiles.extend([x for x in os.listdir(os.getcwd()) if x.endswith(".7z")])
+zipfiles.extend([x for x in os.listdir(os.getcwd()) if x.endswith(".rar")])
 bk = "\\"
 dest = "C:\\Users\\Admin\\Desktop\\pythoonnn\\bub"
 desty = "C:\\Users\\Admin\\Desktop\\flask files"
@@ -19,9 +25,12 @@ imgfilepath = "C:\\Users\\Admin\\Desktop\\images"
 pdfilepath = "C:\\Users\\Admin\\Desktop\\pdf files"
 ttfilepath = "C:\\Users\\Admin\\Desktop\\ttffiles"
 javafilepath = "C:\\Users\\Admin\\Desktop\\javafiles"
+mp3filepath = "C:\\Users\\Admin\\Desktop\\songsss"
+wordsfilepath = "C:\\Users\\Admin\\Desktop\\Word documents"
+zipfilespath = "C:\\Users\\Admin\\Desktop\\Zipfiles"
 output = render('Welcome back,Abhishek', colors=['red', 'blue'], align='center', font='chrome')
 print(output)
-countj, countcpp, counttxt, counttpdf, counttimg, countpy, countt = 0, 0, 0, 0, 0, 0, 0
+countj, countcpp, counttxt, counttpdf, counttimg, countpy, countt, countmus, countword, countzips = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 # Pythonn files
 for x in lst:
     name = x
@@ -36,6 +45,16 @@ for x in lst:
         else:
             countpy += 1
             shutil.move(os.getcwd() + bk[0] + name, dest)
+# zip files
+os.chdir("C:\\Users\\Admin\\Desktop")
+for t in zipfiles:
+    val = t
+    fcheckexist9 = Path(zipfilespath + bk[0] + val)
+    if(fcheckexist9.is_file()):
+        os.remove(os.getcwd() + bk[0] + val)
+    else:
+        countzips += 1
+        shutil.move(os.getcwd() + bk[0] + val, zipfilespath)
 # Text files
 os.chdir("C:\\Users\\Admin\\Desktop")
 for t in lstextf:
@@ -46,6 +65,16 @@ for t in lstextf:
     else:
         counttxt += 1
         shutil.move(os.getcwd() + bk[0] + val, destextfiles)
+# Word files
+os.chdir("C:\\Users\\Admin\\Desktop")
+for t in wordfiles:
+    val = t
+    fcheckexist1 = Path(wordsfilepath + bk[0] + val)
+    if(fcheckexist1.is_file()):
+        os.remove(os.getcwd() + bk[0] + val)
+    else:
+        countword += 1
+        shutil.move(os.getcwd() + bk[0] + val, wordsfilepath)
 # cpp files
 os.chdir("C:\\Users\\Admin\\Desktop")
 for c in cppfil:
@@ -96,11 +125,18 @@ for j in javafils:
     else:
         countj += 1
         shutil.move(os.getcwd() + bk[0] + val, javafilepath)
-# print("Welcome back,Abhishek.Your Desktop shall remain clean from now on.")
+# music mp3 files
+os.chdir("C:\\Users\\Admin\\Desktop")
+for j in mp3files:
+    val = j
+    fcheckexist7 = Path(mp3filepath + bk[0] + val)
+    if(fcheckexist7.is_file()):
+        os.remove(os.getcwd() + bk[0] + val)
+    else:
+        countmus += 1
+        shutil.move(os.getcwd() + bk[0] + val, mp3filepath)
 
-#output1 = render('No file transfer has taken place.', colors=['red', 'blue'], align='left', line_height=0, max_length=0, size=(30, 30))
-
-if(countj == 0 and countcpp == 0 and counttxt == 0 and counttpdf == 0 and counttimg == 0 and countpy == 0 and countt == 0):
+if(countj == 0 and countcpp == 0 and counttxt == 0 and counttpdf == 0 and counttimg == 0 and countpy == 0 and countt == 0 and countmus == 0 and countword == 0 and countzips == 0):
     print("No file transfer has taken place.")
 else:
     print("No of python files moved:" + str(countpy))
@@ -110,3 +146,6 @@ else:
     print("No of image files moved:" + str(counttimg))
     print("No of font files moved:" + str(countt))
     print("No of Java files moved:" + str(countj))
+    print("No of mp3 files moved:" + str(countmus))
+    print("No of word files moved:" + str(countword))
+    print("No of zip files moved:" + str(countzips))
